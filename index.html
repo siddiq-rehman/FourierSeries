@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web assemnly demo</title>
+    <style type="text/css">
+        body {
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            height: 100vh;
+            margin: 0;
+            transform: rotate(90deg);
+            background-color: black;
+        }
+
+        canvas,
+        #mycanvasDraw {
+            border: 1px solid white;
+        }
+
+        .canvasHolder {
+            position: relative;
+            height: 3000px;
+            width: 1650px;
+            background-color: black;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #NVALUE {
+            color: white;
+            font-size: 77px;
+            position: absolute;
+            bottom: 2100px;
+            left: 1000px;
+            z-index: 100000;
+        }
+
+        * {}
+    </style>
+</head>
+
+<body>
+    <script type="module" src="supp.js" defer></script>
+    <script src="main.js" async>
+    </script>
+    <script src="canvs.js" async>
+    </script>
+
+
+    <!-- <script src="canvs.js" async>
+</script>
+<script  type="module"  src="main.js" async>
+</script> -->
+
+
+    <p id="NVALUE"></p>
+
+    <div class="canvasHolder">
+        <canvas id="mycanvas" width="1650" height="3000"></canvas>
+        <canvas id="mycanvasDraw" width="1650" height="3000"></canvas>
+
+    </div>
+
+
+    <!-- <script src="draw.js" defer>
+    </script> -->
+
+
+
+</body>
+
+</html>
