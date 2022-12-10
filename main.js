@@ -1238,7 +1238,7 @@ function updateGlobalBufferAndViews(buf) {
  Module["HEAPF64"] = HEAPF64 = new Float64Array(buf);
 }
 
-var STATIC_BASE = 1024, STACK_BASE = 5271360, STACKTOP = STACK_BASE, STACK_MAX = 28480, DYNAMIC_BASE = 5271360, DYNAMICTOP_PTR = 27552;
+var STATIC_BASE = 1024, STACK_BASE = 5271376, STACKTOP = STACK_BASE, STACK_MAX = 28496, DYNAMIC_BASE = 5271376, DYNAMICTOP_PTR = 27568;
 
 assert(STACK_BASE % 16 === 0, "stack must start aligned");
 
@@ -1899,7 +1899,7 @@ var ERRNO_CODES = {
  ESTRPIPE: 135
 };
 
-var __main_thread_futex_wait_address = 28464;
+var __main_thread_futex_wait_address = 28480;
 
 function _emscripten_futex_wake(addr, count) {
  if (addr <= 0 || addr > GROWABLE_HEAP_I8().length || addr & 3 != 0 || count < 0) return -28;
@@ -1971,12 +1971,12 @@ var PThread = {
   for (var i = 0; i < pthreadPoolSize; ++i) {
    PThread.allocateUnusedWorker();
   }
-  PThread.mainThreadBlock = 27712;
+  PThread.mainThreadBlock = 27728;
   for (var i = 0; i < 232 / 4; ++i) GROWABLE_HEAP_U32()[PThread.mainThreadBlock / 4 + i] = 0;
   SAFE_HEAP_STORE(PThread.mainThreadBlock + 12 | 0, PThread.mainThreadBlock | 0, 4);
   var headPtr = PThread.mainThreadBlock + 156;
   SAFE_HEAP_STORE(headPtr | 0, headPtr | 0, 4);
-  var tlsMemory = 27952;
+  var tlsMemory = 27968;
   for (var i = 0; i < 128; ++i) GROWABLE_HEAP_U32()[tlsMemory / 4 + i] = 0;
   Atomics.store(GROWABLE_HEAP_U32(), PThread.mainThreadBlock + 104 >> 2, tlsMemory);
   Atomics.store(GROWABLE_HEAP_U32(), PThread.mainThreadBlock + 40 >> 2, PThread.mainThreadBlock);
@@ -4982,7 +4982,7 @@ function _emscripten_futex_wait(addr, val, timeout) {
 }
 
 function _emscripten_get_sbrk_ptr() {
- return 27552;
+ return 27568;
 }
 
 function _emscripten_has_threading_support() {
@@ -6377,6 +6377,12 @@ var ___wasm_call_ctors = Module["___wasm_call_ctors"] = function() {
  assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
  assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
  return Module["asm"]["__wasm_call_ctors"].apply(null, arguments);
+};
+
+var _setDataIntegrationLength = Module["_setDataIntegrationLength"] = function() {
+ assert(runtimeInitialized, "you need to wait for the runtime to be ready (e.g. wait for main() to be called)");
+ assert(!runtimeExited, "the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)");
+ return Module["asm"]["setDataIntegrationLength"].apply(null, arguments);
 };
 
 var _setFunctionData = Module["_setFunctionData"] = function() {
