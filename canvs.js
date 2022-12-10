@@ -4,8 +4,10 @@ var earth = new Image();
 
 const event = new Event("finalValues");
 
-canvasWidth = 1650;
-canvasHeight = 3000;
+canvasWidth = 700;
+canvasHeight = 1200;
+
+globalRadius = 1.5;
 
 window.addEventListener(
   "buildPoint",
@@ -17,16 +19,18 @@ window.addEventListener(
     drawCtx.quadraticCurveTo(e.detail.x, e.detail.y, e.detail.x, e.detail.y);
     //drawCtx.lineTo(e.detail.x, e.detail.y);
     drawCtx.stroke();
+    console.log(e)
+   // window.requestAnimationFrame(e.detail.cb(e.detail.count))
   },
   false
 );
 
 var twoPi = 2 * Math.PI;
 
-  var ctx = document.getElementById("mycanvas").getContext("2d");
-    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-    ctx.strokeStyle = "rgba(255,255, 255, 0.5)";
-    ctx.save();
+var ctx = document.getElementById("mycanvas").getContext("2d");
+ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+ctx.strokeStyle = "rgba(255,255, 255, 0.5)";
+ctx.save();
 
 function getFunctionDraw(
   x_center = 0,
@@ -38,18 +42,21 @@ function getFunctionDraw(
   intialFunction = "I"
 ) {
   var timePeriod = 1;
-  deltaT = 0.1;
-  var radius = Math.sqrt(Math.pow(realCoeff, 2) + Math.pow(imgCoeff, 2)) * 5;
+  deltaT = 1;
+  var radius =
+    Math.sqrt(Math.pow(realCoeff, 2) + Math.pow(imgCoeff, 2)) * globalRadius;
 
-
+  
   var t = 0 + count * deltaT;
 
   function x_value(t) {
+
+    //console.log(x_center, (twoPi * k  * t))
     return (
       x_center +
       (realCoeff * Math.cos(twoPi * k * (1 / (timePeriod * 62.5 * 3)) * t) -
         imgCoeff * Math.sin(twoPi * k * (1 / (timePeriod * 62.5 * 3)) * t)) *
-        5
+        globalRadius
     );
   }
 
@@ -58,7 +65,7 @@ function getFunctionDraw(
       y_center +
       (realCoeff * Math.sin(twoPi * k * (1 / (timePeriod * 62.5 * 3)) * t) +
         imgCoeff * Math.cos(twoPi * k * (1 / (timePeriod * 62.5 * 3)) * t)) *
-        5
+        globalRadius
     );
   }
 
@@ -88,6 +95,7 @@ function getFunctionDraw(
     ctx.arc(x, y, intialFunction === "F" ? 10 : 1, 0, 2 * Math.PI, true);
     ctx.fill();
     t += deltaT;
+
     // cb(0, x, y);
     resolve({ x, y });
   });
