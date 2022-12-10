@@ -27,8 +27,13 @@ Module["onRuntimeInitialized"] = () => {
     "number",
     "number",
   ]);
+
+
   var nByte = 8;
-  var length = 11187;
+  var length = data.length;
+
+  const setDataIntegrationLength = Module.cwrap("setDataIntegrationLength", null, ["number"])
+  setDataIntegrationLength(length);
 
   var realBuffer = Module._malloc(length * nByte);
   var imgBuffer = Module._malloc(length * nByte);
@@ -193,6 +198,7 @@ function mainF() {
     }
 
     count++;
+    console.log(cb)
     window.dispatchEvent(new CustomEvent("buildPoint", { detail: { x, y } }));
     window.requestAnimationFrame(cb(count));
   };
