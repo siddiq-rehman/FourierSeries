@@ -23,6 +23,11 @@ window.addEventListener(
 
 var twoPi = 2 * Math.PI;
 
+  var ctx = document.getElementById("mycanvas").getContext("2d");
+    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+    ctx.strokeStyle = "rgba(255,255, 255, 0.5)";
+    ctx.save();
+
 function getFunctionDraw(
   x_center = 0,
   y_center = 0,
@@ -36,7 +41,7 @@ function getFunctionDraw(
   deltaT = 0.1;
   var radius = Math.sqrt(Math.pow(realCoeff, 2) + Math.pow(imgCoeff, 2)) * 5;
 
-  var ctx = document.getElementById("mycanvas").getContext("2d");
+
   var t = 0 + count * deltaT;
 
   function x_value(t) {
@@ -66,9 +71,7 @@ function getFunctionDraw(
       ctx.clearRect(0, 0, canvasWidth, canvasHeight); // clear canvas
     }
 
-    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-    ctx.strokeStyle = "rgba(255,255, 255, 0.5)";
-    ctx.save();
+
 
     ctx.beginPath();
     ctx.arc(x_center, y_center, radius, 0, Math.PI * 2);
